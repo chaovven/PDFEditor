@@ -73,8 +73,30 @@ app.post('/pdf-ocr', function (req, res) {
 });
 
 app.post('/pdf-merge', function (req, res) {
-  req.files.forEach(e => {
-  })
+  // sort files
+  // req.files.sort((a, b) => (a.originalname > b.originalname) ? -1 : ((b.originalname > a.originalname) ? 1 : 0))
+  req.files.sort()
+
+  const PDFMerger = require('pdf-merger-js');
+  var merger = new PDFMerger();
+
+  (async () => {
+    req.files.forEach(file => {
+      merger.add(file.path)
+    })
+    await merger.save('merged.pdf')
+
+    res.download('merged.pdf', (d_err) => {
+      if (d_err) {
+        console.log(d_err)
+      } 
+      for (var i = 0; i < req.files.length; i++) {
+        fs.unlinkSync(req.files[i].path)
+        console.log(`\n${req.files[i].path} deleted!`)
+      }
+    })
+  })();
+
 });
 
 var server = app.listen(8081, function () {
