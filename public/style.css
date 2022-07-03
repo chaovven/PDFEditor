@@ -10,10 +10,11 @@
 }
 
 .container-function {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: auto auto;
     align-items: center;
     justify-content: space-around;
+    gap: 50px;
 }
 
 /* form */

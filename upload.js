@@ -89,7 +89,7 @@ app.post('/pdf-merge', function (req, res) {
     res.download('merged.pdf', (d_err) => {
       if (d_err) {
         console.log(d_err)
-      } 
+      }
       for (var i = 0; i < req.files.length; i++) {
         fs.unlinkSync(req.files[i].path)
         console.log(`\n${req.files[i].path} deleted!`)
@@ -97,6 +97,39 @@ app.post('/pdf-merge', function (req, res) {
     })
   })();
 
+});
+
+app.post('/word-merge', function (req, res) {
+  concatFn = ""
+  // construct cmd
+  req.files.forEach(file => {
+    fs.rename(file.path, `${file.path}.docx`, function (err) {
+      if (err) console.log('ERROR: ' + err);
+    });
+    concatFn += `"${file.path}.docx" `
+  })
+
+  mergedFilename = `${req.files.length}_files_merged.docx`
+  cmd = `pandoc ${concatFn}-o "${mergedFilename}"`
+  exec(cmd, (err, stdout, stderr) => {
+    console.log('\n' + cmd)
+    if (err) {
+      console.log(stderr)
+    } else {
+      res.download(mergedFilename, d_err => {
+        if (d_err) {
+          console.log(d_err)
+        }
+        // delete files
+        console.log("\nTrying to deleting files")
+        for (var i = 0; i < req.files.length; i++) {
+          fs.unlinkSync(req.files[i].path + ".docx")
+          console.log(`\n${req.files[i].path} deleted!`)
+        };
+        fs.unlinkSync(mergedFilename);
+      })
+    }
+  })
 });
 
 var server = app.listen(8081, function () {

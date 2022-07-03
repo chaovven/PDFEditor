@@ -15,7 +15,7 @@
 <body>
     <nav>
         <div class="nav-center">
-            <h2>Professional PDF Editor</h2>
+            <h2>Tools</h2>
         </div>
     </nav>
     <main>
@@ -23,13 +23,25 @@
             <form action="pdf-ocr" method="post" enctype="multipart/form-data">
                 <label for="fileupload">PDF OCR</label><br>
                 <input type="file" name="fileupload" multiple>
-                <input type="submit" class="btn btn-ocr" value="start">
+                <input type="submit" class="btn btn-pdf-ocr" value="start">
             </form>
 
             <form action="pdf-merge" method="post" enctype="multipart/form-data">
                 <label for="fileupload">PDF Merge</label><br>
                 <input type="file" name="fileupload" multiple>
-                <input type="submit" class="btn btn-merge" value="start">
+                <input type="submit" class="btn btn-pdf-merge" value="start">
+            </form>
+
+            <form action="word-merge" method="post" enctype="multipart/form-data">
+                <label for="fileupload">WORD Merge</label><br>
+                <input type="file" name="fileupload" accept=".doc,.docx" multiple>
+                <input type="submit" class="btn btn-word-merge" value="start">
+            </form>
+
+            <form action="pkulaw-merge" method="post" enctype="multipart/form-data">
+                <label for="fileupload">PKULaw Word Merge</label><br>
+                <input type="file" name="fileupload" multiple>
+                <input type="submit" class="btn btn-pkulaw-merge" value="start">
             </form>
         </div>
     </main>
