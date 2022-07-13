@@ -7,44 +7,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Processing</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 
 <body>
-    <nav>
-        <div class="nav-center">
-            <h2>Tools</h2>
-        </div>
-    </nav>
-    <main>
-        <div class="container-function">
-            <form action="pdf-ocr" method="post" enctype="multipart/form-data">
-                <label for="fileupload">PDF OCR</label><br>
+    <!-- title -->
+    <header class="header-center">tools</header>
+    <!-- functions -->
+    <div class="functions">
+        <!-- fun -->
+        <div class="function pdf">
+            <div class="form-title">
+                <i class="fa-solid fa-file-pdf"></i>
+                <label for="fileupload">pdf ocr</label><br>
+                <button class="expand">
+                    <i class="fa-solid fa-plus-square"></i>
+                    <i class="fa-solid fa-minus-square"></i>
+                </button>
+            </div>
+            <form action="pdf-ocr" class="form-action" method="post" enctype="multipart/form-data">
                 <input type="file" name="fileupload" multiple>
                 <input type="submit" class="btn btn-pdf-ocr" value="start">
             </form>
+        </div>
 
-            <form action="pdf-merge" method="post" enctype="multipart/form-data">
-                <label for="fileupload">PDF Merge</label><br>
+
+        <!-- fun -->
+        <div class="function pdf">
+            <div class="form-title">
+                <i class="fa-solid fa-file-pdf"></i>
+                <label for="fileupload">pdf merge</label><br>
+                <button class="expand">
+                    <i class="fa-solid fa-plus-square"></i>
+                    <i class="fa-solid fa-minus-square"></i>
+                </button>
+            </div>
+            <form action="pdf-merge" class="form-action" method="post" enctype="multipart/form-data">
                 <input type="file" name="fileupload" multiple>
                 <input type="submit" class="btn btn-pdf-merge" value="start">
             </form>
+        </div>
 
-            <form action="word-merge" method="post" enctype="multipart/form-data">
-                <label for="fileupload">WORD Merge</label><br>
-                <input type="file" name="fileupload" accept=".doc,.docx" multiple>
+        <!-- fun -->
+        <div class="function word">
+            <div class="form-title">
+                <i class="fa-solid fa-file-word"></i>
+                <label for="fileupload">word merge</label><br>
+                <button class="expand">
+                    <i class="fa-solid fa-plus-square"></i>
+                    <i class="fa-solid fa-minus-square"></i>
+                </button>
+            </div>
+            <form action="word-merge" class="form-action" method="post" enctype="multipart/form-data">
+                <input type="file" name="fileupload" multiple>
                 <input type="submit" class="btn btn-word-merge" value="start">
             </form>
-
-            <form action="pkulaw-merge" method="post" enctype="multipart/form-data">
-                <label for="fileupload">PKULaw Word Merge</label><br>
-                <input type="file" name="fileupload" multiple>
-                <input type="submit" class="btn btn-pkulaw-merge" value="start">
-            </form>
         </div>
-    </main>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 
 </html>
