@@ -75,7 +75,15 @@ app.post('/pdf-ocr', function (req, res) {
 app.post('/pdf-merge', function (req, res) {
   // sort files
   // req.files.sort((a, b) => (a.originalname > b.originalname) ? -1 : ((b.originalname > a.originalname) ? 1 : 0))
-  req.files.sort()
+  for (let i = 0; i < req.files.length; i++) {
+    digitList = req.files[i].originalname.match(/\d+/g);
+    order = 0
+    for (let j = 0; j < digitList.length; j++) {
+      order += Number(digitList[j]) * (10 ** (digitList.length - j))
+    }
+    req.files[i].order = order
+  }
+  req.files.sort((a, b) => { return a.order - b.order; })
 
   const PDFMerger = require('pdf-merger-js');
   var merger = new PDFMerger();
